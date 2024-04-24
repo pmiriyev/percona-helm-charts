@@ -20,7 +20,7 @@ jobs:
       # Package Helm charts
       - name: Package Helm charts
         run: |
-          helm package charts/pmm --destination public/
+          helm package charts/pmm --destination ~/public/
       
       # Generate Helm repo index
       - name: Generate Helm repo index
@@ -37,8 +37,8 @@ jobs:
       # Move artifacts to root directory
       - name: Move artifacts
         run: |
-          mv public/* .
-          rm -rf public/
+          mv ~/public/* .
+          rm -rf ~/public/
       
       # Commit and push changes
       - name: Commit and push changes
