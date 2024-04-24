@@ -20,13 +20,12 @@ jobs:
       # Package Helm charts
       - name: Package Helm charts
         run: |
-          helm package charts/pmm --destination public/
-          echo $(pwd)
+          helm package charts/pmm --destination .
       
       # Generate Helm repo index
       - name: Generate Helm repo index
         run: |
-          helm repo index public --url https://pmiriyev.github.io/percona-helm-charts/
+          helm repo index . --url https://pmiriyev.github.io/percona-helm-charts/
 
   deploy:
     runs-on: ubuntu-latest
@@ -34,13 +33,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      # Move artifacts to root directory
-      - name: Move artifacts
-        run: |
-          echo $(pwd)
-          mv public/* .
-          rm -rf public
       
       # Commit and push changes
       - name: Commit and push changes
