@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - publish
-#    paths:
-#      - 'charts/**'
 
 jobs:
   release:
@@ -26,11 +24,7 @@ jobs:
     - name: Package Helm Charts
       run: |
         mkdir ./chart-packages
-        for dir in charts/*; do
-          if [ -d "$dir" ]; then
-            helm package "$dir" --destination ./chart-packages
-          fi
-        done
+        helm package charts/pmm --destination ./chart-packages
 
     - name: Publish Helm Charts
       run: |
