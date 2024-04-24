@@ -36,3 +36,16 @@ jobs:
         git add charts/
         git commit -m "Publish Helm charts"
         git push origin gh-pages
+
+###
+# first create gh-pages branch
+# 
+# git checkout --orphan gh-pages
+# git rm -rf .
+# echo "Helm Chart Repository" > README.md
+# git add README.md
+# git commit -m "Initial commit for gh-pages branch"
+# git push origin gh-pages
+# 
+# on repo settings, enable pages and choose to deploy from branch, choose br gh-pages and folder /root
+# on actions tab, choose workflow permissions, check read and write permissions
