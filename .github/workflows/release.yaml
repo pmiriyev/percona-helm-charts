@@ -20,7 +20,7 @@ jobs:
       # Package Helm charts
       - name: Package Helm charts
         run: |
-          helm package charts/ --destination .
+          helm package charts/pmm --destination .
 
       # Move packaged charts to docs directory
       - name: Move charts to docs directory
