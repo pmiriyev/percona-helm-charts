@@ -20,12 +20,18 @@ jobs:
       # Package Helm charts
       - name: Package Helm charts
         run: |
-          helm package charts/pmm --destination .
+          helm package charts/ --destination .
+
+      # Move packaged charts to docs directory
+      - name: Move charts to docs directory
+        run: |
+          mkdir -p .charts
+          mv *.tgz .charts/
       
       # Generate Helm repo index
       - name: Generate Helm repo index
         run: |
-          helm repo index . --url https://pmiriyev.github.io/percona-helm-charts/
+          helm repo index .charts --url https://pmiriyev.github.io/percona-helm-charts/
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,6 +64,7 @@ jobs:
       # Push changes to GitHub Pages branch
       - name: Push changes to GitHub Pages
         run: |
+          git checkout publish
           git add .
           git commit -m "Publish Helm charts"
           git push origin publish:gh-pages
