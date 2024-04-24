@@ -25,17 +25,14 @@ jobs:
       # Package Helm charts
       - name: Package Helm charts
         run: |
-          mkdir ./chart-packages
-          helm package charts/* --destination ./chart-packages
+          helm package charts/pmm --destination public/
 
       - name: Publish Helm Chart to gh-pages
         run: |
           git fetch --all
           git checkout gh-pages || git checkout --orphan gh-pages
           git reset --hard
-          mkdir -p charts
-          mv ./chart-packages/* charts/
           helm repo index charts --url https://pmiriyev.github.io/percona-helm-charts/
-          git add charts
+          git add public
           git commit -m "Publish Helm charts"
           git push origin gh-pages
